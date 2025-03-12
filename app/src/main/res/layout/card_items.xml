@@ -28,7 +28,7 @@
                     android:text="Title: " />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -47,7 +47,7 @@
                     android:text="Category: " />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/categoryText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -57,7 +57,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/viewImageBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             app:srcCompat="@drawable/baseline_preview_24" />

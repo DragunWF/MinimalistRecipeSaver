@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.minimalistrecipesaver.adapters.RecipeAdapter;
 import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
 import com.example.minimalistrecipesaver.helpers.Utils;
 
@@ -20,8 +21,14 @@ public class MainActivity extends AppCompatActivity {
     private SearchView searchBar;
 
     private RecyclerView recipeRecycler;
-    private RecyclerView.Adapter recipeAdapter;
+    private RecipeAdapter recipeAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recipeAdapter.updateDataSet();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private void setRecycler() {
         recipeRecycler.setHasFixedSize(false);
 
-        // TODO: Add adapter
+        recipeAdapter = new RecipeAdapter(DatabaseHelper.getRecipeBank().getAll(), this);
+        recipeRecycler.setAdapter(recipeAdapter);
 
         layoutManager = new LinearLayoutManager(this);
         recipeRecycler.setLayoutManager(layoutManager);
