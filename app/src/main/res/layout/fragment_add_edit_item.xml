@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AddEditItemFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -17,39 +16,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Title"
-            app:hintTextColor="@color/hintColor"
-            app:boxStrokeColor="@color/boxStrokeColor"
-            app:errorTextColor="@color/errorColor"
-            app:focusedBoxStrokeColor="@color/focusedBoxStrokeColor"
-            android:layout_marginTop="20dp"
-            >
+            android:layout_marginTop="20dp">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
-        <TextView
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category Tag:"
-            android:textSize="16sp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"/>
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="5dp"/>
+            android:hint="Category"
+            android:layout_marginTop="10dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/categoryText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Preparation time"
-            app:hintTextColor="@color/hintColor"
-            app:boxStrokeColor="@color/boxStrokeColor"
-            app:errorTextColor="@color/errorColor"
-            app:focusedBoxStrokeColor="@color/focusedBoxStrokeColor"
             android:layout_marginTop="10dp">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/preparationTimeText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -58,12 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ingredients list:"
-            app:hintTextColor="@color/hintColor"
-            app:boxStrokeColor="@color/boxStrokeColor"
-            app:errorTextColor="@color/errorColor"
-            app:focusedBoxStrokeColor="@color/focusedBoxStrokeColor"
             android:layout_marginTop="10dp">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ingredientsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -72,17 +60,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Cooking instruction:"
-            app:hintTextColor="@color/hintColor"
-            app:boxStrokeColor="@color/boxStrokeColor"
-            app:errorTextColor="@color/errorColor"
-            app:focusedBoxStrokeColor="@color/focusedBoxStrokeColor"
             android:layout_marginTop="10dp">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cookingInstructionsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitBtn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="Submit"
