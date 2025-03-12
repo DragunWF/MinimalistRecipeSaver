@@ -10,11 +10,15 @@ import android.view.ViewGroup;
 
 import com.example.minimalistrecipesaver.data.Recipe;
 import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
+import com.example.minimalistrecipesaver.helpers.Utils;
+import com.example.minimalistrecipesaver.services.RecipeService;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +92,34 @@ public class AddEditItemFragment extends Fragment {
         }
 
         submitBtn.setOnClickListener(v -> {
+            String title = Utils.getText(titleText);
+            String category = Utils.getText(categoryText);
+            String preparationTimeStr = Utils.getText(preparationTimeText);
+            String ingredients = Utils.getText(ingredientsText);
+            String instructions = Utils.getText(instructionsText);
 
+            if (title.isEmpty() || preparationTimeStr.isEmpty() || ingredients.isEmpty() || instructions.isEmpty()) {
+                Utils.longToast("All fields are required!", requireContext());
+                return;
+            }
+
+            int preparationTime = Integer.parseInt(preparationTimeStr);
+            ArrayList<String> ingredientsList = Utils.convertIngredientsToList(ingredients);
+            if (isEditForm) {
+                Recipe recipe = DatabaseHelper.getRecipeBank().get(viewedRecipeId);
+                recipe.setTitle(title);
+                recipe.setCategory(category);
+                recipe.setPreparationTime(preparationTime);
+                recipe.setIngredients(ingredientsList);
+                recipe.setCookingInstructions(instructions);
+                RecipeService.edit(recipe);
+                Utils.longToast(title + " has been edited!", requireContext());
+            } else {
+                RecipeService.add(new Recipe(title, category, instructions, preparationTime, ingredientsList));
+                Utils.longToast(title + " has been added to the recipe list!", requireContext());
+            }
+
+            requireActivity().finish();
         });
 
         return view;
