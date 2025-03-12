@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
 import com.example.minimalistrecipesaver.helpers.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         try {
+            DatabaseHelper.initialize(this);
+            DatabaseHelper.addDummyData();
+
             bindUIElements();
             setButtons();
             setRecycler();
