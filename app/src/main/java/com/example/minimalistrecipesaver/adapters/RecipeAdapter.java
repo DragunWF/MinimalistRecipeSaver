@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.minimalistrecipesaver.ItemsActivity;
 import com.example.minimalistrecipesaver.R;
-import com.example.minimalistrecipesaver.ViewItem;
 import com.example.minimalistrecipesaver.data.Recipe;
 import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
 
