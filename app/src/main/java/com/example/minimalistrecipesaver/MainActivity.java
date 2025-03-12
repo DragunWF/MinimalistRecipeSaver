@@ -13,8 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.minimalistrecipesaver.adapters.RecipeAdapter;
+import com.example.minimalistrecipesaver.data.Recipe;
 import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
 import com.example.minimalistrecipesaver.helpers.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button addBtn;
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             bindUIElements();
             setButtons();
             setRecycler();
+            setSearch();
         } catch (Exception err) {
             err.printStackTrace();
             Utils.longToast(err.getMessage(), this);
@@ -75,5 +80,36 @@ public class MainActivity extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this);
         recipeRecycler.setLayoutManager(layoutManager);
+    }
+
+    private void setSearch() {
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                update(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                update(newText);
+                return false;
+            }
+
+            public void update(String query) {
+                List<Recipe> recipes = DatabaseHelper.getRecipeBank().getAll();
+                List<Recipe> results = new ArrayList<>();
+
+                query = query.toLowerCase(); // case insensitivity
+                for (Recipe recipe : recipes) {
+                    String recipeTitle = recipe.getTitle().toLowerCase();
+                    if (recipeTitle.contains(query)) {
+                        results.add(recipe);
+                    }
+                }
+
+                recipeAdapter.updateDataSet(results);
+            }
+        });
     }
 }
