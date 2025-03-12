@@ -28,7 +28,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView titleText, categoryText;
-        private final ImageView viewImageBtn;
+        private final ImageView viewImageBtn, deleteImageBtn;
 
         public ViewHolder(View view) {
             super(view);
@@ -37,6 +37,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             titleText = view.findViewById(R.id.titleText);
             categoryText = view.findViewById(R.id.categoryText);
             viewImageBtn = view.findViewById(R.id.viewImageBtn);
+            deleteImageBtn = view.findViewById(R.id.deleteImageBtn);
         }
 
         public TextView getTitleText() {
@@ -49,6 +50,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         public ImageView getViewImageBtn() {
             return viewImageBtn;
+        }
+
+        public ImageView getDeleteImageBtn() {
+            return deleteImageBtn;
         }
     }
 
@@ -88,6 +93,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             Intent intent = new Intent(context, ItemsActivity.class);
             intent.putExtra(Recipe.RECIPE_ID, recipe.getId());
             context.startActivity(intent);
+        });
+        viewHolder.getDeleteImageBtn().setOnClickListener(v -> {
+           DatabaseHelper.getRecipeBank().delete(recipe.getId());
+           updateDataSet();
         });
     }
 
