@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.minimalistrecipesaver.data.Recipe;
 import com.example.minimalistrecipesaver.helpers.Utils;
@@ -33,6 +34,10 @@ public class ItemsActivity extends AppCompatActivity {
 
             bindUIElements();
             setButtons();
+
+            if (savedInstanceState == null) {
+                loadViewItemFragment();
+            }
         } catch (Exception err) {
             err.printStackTrace();
             Utils.longToast(err.getMessage(), this);
@@ -55,5 +60,19 @@ public class ItemsActivity extends AppCompatActivity {
         editImageBtn.setOnClickListener(v -> {
 
         });
+    }
+
+    private void loadViewItemFragment() {
+        // Create a new instance of the fragment with the recipe ID
+        ViewItemFragment fragment = ViewItemFragment.newInstance(viewedRecipeId);
+
+        // Begin a transaction
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        // Replace the container with the new fragment
+        transaction.replace(R.id.fragmentContainerView, fragment);
+
+        // Commit the transaction
+        transaction.commit();
     }
 }

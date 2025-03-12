@@ -29,6 +29,10 @@ public class Recipe extends Model {
                 '}';
     }
 
+    public String getIngredientsRawString() {
+        return String.join(", ", ingredients);
+    }
+
     public String getTitle() {
         return title;
     }

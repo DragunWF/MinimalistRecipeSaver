@@ -40,9 +40,8 @@
 
         </LinearLayout>
 
-        <androidx.fragment.app.FragmentContainerView
+        <FrameLayout
             android:id="@+id/fragmentContainerView"
-            android:name="com.example.minimalistrecipesaver.ViewItemFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"/>
