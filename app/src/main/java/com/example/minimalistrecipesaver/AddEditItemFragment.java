@@ -1,5 +1,7 @@
 package com.example.minimalistrecipesaver;
 
+import static com.example.minimalistrecipesaver.R.array.categories_array_form;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.minimalistrecipesaver.data.Recipe;
 import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
@@ -76,16 +80,23 @@ public class AddEditItemFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_edit_item, container, false);
         TextInputEditText titleText = view.findViewById(R.id.titleText);
-        TextInputEditText categoryText = view.findViewById(R.id.categoryText);
+        Spinner categorySpinner = view.findViewById(R.id.categorySpinner);
         TextInputEditText preparationTimeText = view.findViewById(R.id.preparationTimeText);
         TextInputEditText ingredientsText = view.findViewById(R.id.ingredientsText);
         TextInputEditText instructionsText = view.findViewById(R.id.cookingInstructionsText);
         MaterialButton submitBtn = view.findViewById(R.id.submitBtn);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                requireContext(),
+                categories_array_form,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapter);
+
         if (isEditForm) {
             Recipe recipe = DatabaseHelper.getRecipeBank().get(viewedRecipeId);
             titleText.setText(recipe.getTitle());
-            categoryText.setText(recipe.getCategory());
             preparationTimeText.setText(String.valueOf(recipe.getPreparationTime()));
             ingredientsText.setText(recipe.getIngredientsRawString());
             instructionsText.setText(recipe.getCookingInstructions());
@@ -93,7 +104,7 @@ public class AddEditItemFragment extends Fragment {
 
         submitBtn.setOnClickListener(v -> {
             String title = Utils.getText(titleText);
-            String category = Utils.getText(categoryText);
+            String category = categorySpinner.getSelectedItem().toString();
             String preparationTimeStr = Utils.getText(preparationTimeText);
             String ingredients = Utils.getText(ingredientsText);
             String instructions = Utils.getText(instructionsText);
