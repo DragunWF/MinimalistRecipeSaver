@@ -2,4 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="hintColor">#757575</color>
+
+    <!-- Box stroke color (the outline around the TextInputLayout) -->
+    <color name="boxStrokeColor">#6200EE</color>
+
+    <!-- Box background color (default background of the box) -->
+    <color name="boxBackgroundColor">#FFFFFF</color>
+
+    <!-- Error text color (color of the error message) -->
+    <color name="errorColor">#B00020</color>
+
+    <!-- Focused box stroke color -->
+    <color name="focusedBoxStrokeColor">#3700B3</color>
+
+    <!-- Input text color -->
+    <color name="textColor">#000000</color>
 </resources>
