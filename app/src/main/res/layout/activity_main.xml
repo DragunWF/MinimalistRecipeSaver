@@ -22,19 +22,21 @@
             android:orientation="horizontal">
 
             <SearchView
+                android:id="@+id/searchBar"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/addBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Add Recipe" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipeRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp">
