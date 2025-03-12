@@ -74,6 +74,7 @@
             android:layout_height="48dp"
             android:text="Submit"
             android:layout_marginTop="40dp"/>
+
     </LinearLayout>
 
 </FrameLayout>
