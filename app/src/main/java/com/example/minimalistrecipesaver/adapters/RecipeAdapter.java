@@ -1,6 +1,7 @@
 package com.example.minimalistrecipesaver.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.minimalistrecipesaver.ItemsActivity;
 import com.example.minimalistrecipesaver.R;
+import com.example.minimalistrecipesaver.ViewItem;
 import com.example.minimalistrecipesaver.data.Recipe;
 import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
 
@@ -83,7 +86,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         viewHolder.getCategoryText().setText(recipe.getCategory());
 
         viewHolder.getViewImageBtn().setOnClickListener(v -> {
-
+            Intent intent = new Intent(context, ItemsActivity.class);
+            intent.putExtra(Recipe.RECIPE_ID, recipe.getId());
+            context.startActivity(intent);
         });
     }
 
