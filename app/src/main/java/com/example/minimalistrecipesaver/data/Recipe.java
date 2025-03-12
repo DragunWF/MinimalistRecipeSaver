@@ -3,6 +3,8 @@ package com.example.minimalistrecipesaver.data;
 import java.util.ArrayList;
 
 public class Recipe extends Model {
+    public static final String RECIPE_ID = "recipeId";
+
     private String title, category, cookingInstructions;
     private int preparationTime; // minutes
     private ArrayList<String> ingredients;
