@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             DatabaseHelper.initialize(this);
+            DatabaseHelper.clear(); // remove later
             DatabaseHelper.addDummyData();
 
             bindUIElements();
