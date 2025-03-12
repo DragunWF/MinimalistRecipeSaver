@@ -8,6 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.minimalistrecipesaver.data.Recipe;
+import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import org.w3c.dom.Text;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddEditItemFragment#newInstance} factory method to
@@ -23,6 +31,7 @@ public class AddEditItemFragment extends Fragment {
 
     private String formType;
     private int viewedRecipeId;
+    private boolean isEditForm;
 
     public AddEditItemFragment() {
         // Required empty public constructor
@@ -52,6 +61,8 @@ public class AddEditItemFragment extends Fragment {
         if (getArguments() != null) {
             formType = getArguments().getString(ARG_PARAM1);
             viewedRecipeId = getArguments().getInt(ARG_PARAM2);
+
+            isEditForm = viewedRecipeId != -1;
         }
     }
 
@@ -59,6 +70,27 @@ public class AddEditItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_edit_item, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_edit_item, container, false);
+        TextInputEditText titleText = view.findViewById(R.id.titleText);
+        TextInputEditText categoryText = view.findViewById(R.id.categoryText);
+        TextInputEditText preparationTimeText = view.findViewById(R.id.preparationTimeText);
+        TextInputEditText ingredientsText = view.findViewById(R.id.ingredientsText);
+        TextInputEditText instructionsText = view.findViewById(R.id.cookingInstructionsText);
+        MaterialButton submitBtn = view.findViewById(R.id.submitBtn);
+
+        if (isEditForm) {
+            Recipe recipe = DatabaseHelper.getRecipeBank().get(viewedRecipeId);
+            titleText.setText(recipe.getTitle());
+            categoryText.setText(recipe.getCategory());
+            preparationTimeText.setText(String.valueOf(recipe.getPreparationTime()));
+            ingredientsText.setText(recipe.getIngredientsRawString());
+            instructionsText.setText(recipe.getCookingInstructions());
+        }
+
+        submitBtn.setOnClickListener(v -> {
+
+        });
+
+        return view;
     }
 }
