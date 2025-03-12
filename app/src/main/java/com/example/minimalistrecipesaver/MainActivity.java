@@ -1,5 +1,6 @@
 package com.example.minimalistrecipesaver;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String INITIAL_ITEM_FRAGMENT = "initialItemFragment";
+    public static final String ADD_FORM = "addForm";
+    public static final String EDIT_FORM = "editForm";
+    public static final String VIEW_FORM = "viewForm";
+
     private Button addBtn;
     private SearchView searchBar;
     private Spinner categorySpinner;
@@ -75,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setButtons() {
         addBtn.setOnClickListener(v -> {
-
+            Intent intent = new Intent(MainActivity.this, ItemsActivity.class);
+            intent.putExtra(MainActivity.INITIAL_ITEM_FRAGMENT, MainActivity.ADD_FORM);
+            startActivity(intent);
         });
     }
 

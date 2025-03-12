@@ -14,15 +14,15 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class AddEditItemFragment extends Fragment {
+    public static final String ADD_FORM = "add";
+    public static final String EDIT_FORM = "edit";
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String formType;
+    private int viewedRecipeId;
 
     public AddEditItemFragment() {
         // Required empty public constructor
@@ -37,11 +37,11 @@ public class AddEditItemFragment extends Fragment {
      * @return A new instance of fragment AddEditItem.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddEditItemFragment newInstance(String param1, String param2) {
+    public static AddEditItemFragment newInstance(String param1, int param2) {
         AddEditItemFragment fragment = new AddEditItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,8 +50,8 @@ public class AddEditItemFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            formType = getArguments().getString(ARG_PARAM1);
+            viewedRecipeId = getArguments().getInt(ARG_PARAM2);
         }
     }
 
