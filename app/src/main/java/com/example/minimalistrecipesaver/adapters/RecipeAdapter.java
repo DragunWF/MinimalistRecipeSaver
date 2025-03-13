@@ -1,6 +1,7 @@
 package com.example.minimalistrecipesaver.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.minimalistrecipesaver.ItemsActivity;
 import com.example.minimalistrecipesaver.R;
 import com.example.minimalistrecipesaver.data.Recipe;
 import com.example.minimalistrecipesaver.helpers.DatabaseHelper;
+import com.example.minimalistrecipesaver.helpers.Utils;
 
 import java.util.List;
 
@@ -95,8 +98,23 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             context.startActivity(intent);
         });
         viewHolder.getDeleteImageBtn().setOnClickListener(v -> {
-           DatabaseHelper.getRecipeBank().delete(recipe.getId());
-           updateDataSet();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    DatabaseHelper.getRecipeBank().delete(recipe.getId());
+                    updateDataSet();
+                    Utils.longToast(recipe.getTitle() + " has been deleted!", context);
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancels the dialog.
+                }
+            });
+            builder.setMessage("Are you sure you want to delete " + recipe.getTitle() + "?");
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
     }
 
