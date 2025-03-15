@@ -46,7 +46,7 @@
 1️⃣ Clone this repository:
 
 ```bash
-git clone https://github.com/yourusername/MinimalistRecipeSaver.git
+git clone https://github.com/DragunWF/MinimalistRecipeSaver.git
 ```
 
 2️⃣ Open **Android Studio** and select **Open an Existing Project**
